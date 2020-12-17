@@ -1,10 +1,11 @@
 set JAVA_HOME=d:\java\jdk-11
 set PATH=%PATH%;d:\java\jdk-11\bin
 set PATH=%PATH%;d:\java\apache-maven-3.6.3\bin
+mvn --version
 mvn archetype:generate
 mnv compile
 mnv package
-mvn install
+mvn clear install
 
 
 
