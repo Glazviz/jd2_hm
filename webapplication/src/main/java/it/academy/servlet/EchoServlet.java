@@ -26,14 +26,13 @@ public class EchoServlet extends HttpServlet {
         pw.println("<html><body>"
                 + "<hr>" + message
                 +"<hr><br>Sss:doGet: page=" + parm1
-                +"<br>Sss:doGet: name=" + parm2
-                +"<br>Sss:getRemoteHost: "+req.getRemoteHost()
-                +"<br>Sss:getServletPath: "+req.getServletPath()
-                +"<br>Sss:getServerName: "+req.getServerName()
-                +"<br>Sss:rq.getContextPath: " + req.getContextPath()
-                + "<br>Sss:rq.getRequestURI: " + req.getRequestURI()
-                + "<br>Sss:rq.getRequestURL: " + req.getRequestURL()
-                + "<img src=\"images/Anime-Wallpapers-16.jpg\"/>"
+                +"<br>doGet: name=" + parm2
+                +"<br>getRemoteHost: "+req.getRemoteHost()
+                +"<br>getServletPath: "+req.getServletPath()
+                +"<br>getServerName: "+req.getServerName()
+                +"<br>rq.getContextPath: " + req.getContextPath()
+                + "<br>rq.getRequestURI: " + req.getRequestURI()
+                + "<br>rq.getRequestURL: " + req.getRequestURL()
                 + "</body></html>");
         pw.close();
     }
