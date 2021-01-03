@@ -10,15 +10,12 @@ public class TaskFive {
 
     public static void main(String[] args) {
         String num = args[0];
-        int numArg = Integer.parseInt(num);
 
-        String dateArg = args[1];
+        String date = args[1];
 
         String receiver = args[2];
-        int receiverArg = Integer.parseInt(receiver);
 
         String values = args[3];
-        double valueArg = Double.parseDouble(values);
 
         try {
 
@@ -32,10 +29,11 @@ public class TaskFive {
                     "values (?, ?, ?, ?)";
 
             PreparedStatement pStatement = connection.prepareStatement(template);
-            pStatement.setInt(1, numArg);
-            pStatement.setString(2, dateArg);
-            pStatement.setInt(3, receiverArg);
-            pStatement.setDouble(4, valueArg);
+            pStatement.setInt(1, Integer.parseInt(num));
+            pStatement.setString(2, date);
+            pStatement.setInt(3, Integer.parseInt(receiver));
+            double value = 0;
+            pStatement.setDouble(4, value);
 
             final int result = pStatement.executeUpdate();
 
@@ -45,9 +43,9 @@ public class TaskFive {
 
                 num = resultPrint.getString(1);
                 String paydate = resultPrint.getString(2);
-                double value = resultPrint.getDouble(3);
+                value = resultPrint.getDouble(3);
                 String name = resultPrint.getString(4);
-                System.out.println("num" + num +"date: " + paydate + ", value=" + value + ", name=" + name);
+                System.out.println("num" + num + "date: " + paydate + ", value=" + value + ", name=" + name);
             }
             pStatement.close();
             resultPrint.close();
