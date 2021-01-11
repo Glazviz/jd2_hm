@@ -15,7 +15,6 @@ public class SimpleCountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try
         {
-            getServletContext().getRealPath("/count.txt");
             PrintWriter out = resp.getWriter();
             DataInputStream output = new DataInputStream(new BufferedInputStream(new FileInputStream("/count.txt")));
             int count = output.readInt() + 1;
@@ -30,6 +29,7 @@ public class SimpleCountServlet extends HttpServlet {
                     + "</body>"
                     + "</html>");
             DataOutputStream input = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("/count.txt")));
+            getServletContext().getRealPath("/count.txt");
             input.writeInt(count);
             input.flush();
             input.close();
