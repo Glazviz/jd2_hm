@@ -2,19 +2,21 @@ package it.academy.servlet;
 
 import java.sql.*;
 
-import static javax.servlet.SessionTrackingMode.URL;
-import static sun.net.ftp.FtpDirEntry.Permission.USER;
-
 public class TaskFour {
 
+    private static final String URL = "jdbc:mysql://localhost:3306/ups?serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "root";
+
     public static void main(String[] args) {
-        String num = args[0];
 
-        String date = args[1];
+        String dateArg = args[0];
 
-        String receiver = args[2];
+        String receiver = args[1];
+        int receiverArg = Integer.parseInt(receiver);
 
-        String value = args[3];
+        String values = args[2];
+        double valueArg = Double.parseDouble(values);
 
         try {
 
@@ -25,8 +27,8 @@ public class TaskFour {
             final Statement statement = connection.createStatement();
 
 
-            String dateQuery = "('" + date + "'" + "," + receiver + "," + value + ")";
-            String query = "insert into usp.expenses (num, paydate, receiver, value) \n" +
+            String dateQuery = "('" + dateArg + "'" + "," + receiverArg + "," + valueArg + ")";
+            String query = "insert into ups.expenses (paydate,receiver,value) \n" +
                     "values" + dateQuery + ";";
 
             final int result = statement.executeUpdate(query);
@@ -34,7 +36,7 @@ public class TaskFour {
             final ResultSet resultPrint = statement.executeQuery("select * from expenses;");
 
             while (resultPrint.next()) {
-                String num = resultPrint.getInt(1);
+
                 String paydate = resultPrint.getString(2);
                 double value = resultPrint.getDouble(3);
                 String name = resultPrint.getString(4);

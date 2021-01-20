@@ -2,20 +2,24 @@ package it.academy.servlet;
 
 import java.sql.*;
 
+import static javax.servlet.SessionTrackingMode.URL;
+import static sun.net.ftp.FtpDirEntry.Permission.USER;
+
 public class TaskFive {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/usp?serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/ups?serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
 
     public static void main(String[] args) {
-        String num = args[0];
 
-        String date = args[1];
+        String dateArg = args[0];
 
-        String receiver = args[2];
+        String receiver = args[1];
+        int receiverArg = Integer.parseInt(receiver);
 
-        String values = args[3];
+        String values = args[2];
+        double valueArg = Double.parseDouble(values);
 
         try {
 
@@ -25,15 +29,14 @@ public class TaskFive {
 
             final Statement statement = connection.createStatement();
 
-            String template = "insert into usp.expenses (num, paydate,receiver,value) \n" +
-                    "values (?, ?, ?, ?)";
+            String template = "insert into ups.expenses (paydate,receiver,value) \n" +
+                    "values (?, ?, ?)";
 
             PreparedStatement pStatement = connection.prepareStatement(template);
-            pStatement.setInt(1, Integer.parseInt(num));
-            pStatement.setString(2, date);
-            pStatement.setInt(3, Integer.parseInt(receiver));
-            double value = 0;
-            pStatement.setDouble(4, value);
+
+            pStatement.setString(1, dateArg);
+            pStatement.setInt(2, receiverArg);
+            pStatement.setDouble(3, valueArg);
 
             final int result = pStatement.executeUpdate();
 
@@ -41,11 +44,10 @@ public class TaskFive {
 
             while (resultPrint.next()) {
 
-                num = resultPrint.getString(1);
                 String paydate = resultPrint.getString(2);
-                value = resultPrint.getDouble(3);
+                double value = resultPrint.getDouble(3);
                 String name = resultPrint.getString(4);
-                System.out.println("num" + num + "date: " + paydate + ", value=" + value + ", name=" + name);
+                System.out.println("date: " + paydate + ", value=" + value + ", name=" + name);
             }
             pStatement.close();
             resultPrint.close();
