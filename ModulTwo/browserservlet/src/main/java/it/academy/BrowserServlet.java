@@ -24,6 +24,7 @@ public class BrowserServlet extends HttpServlet {
         out.println("<html lang=\"en\"><head><title>First Servlet</title></head>");
         out.println("<body><h1>Приветствую пользовалетя "+browserName+" </h1>");
         out.println("</body></html>");
+
     }
 
 }
